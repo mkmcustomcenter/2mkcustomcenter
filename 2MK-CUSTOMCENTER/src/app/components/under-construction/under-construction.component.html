@@ -26,9 +26,22 @@
   <div class="uc-right">
     <div class="uc-bg-image"></div>
     <div class="uc-content">
-      <h1>Site en construction</h1>
-      <h2>Nous travaillons dur en ce moment pour vous fournir la meilleure expérience ici</h2>
-      <button class="uc-btn" (click)="openContactForm()">Être contacté par 2MK</button>
+      <h1>Site en construction.</h1>
+      <h2>Nous travaillons dur en ce moment pour vous fournir la meilleure expérience ici.</h2>
+      <!-- <button class="uc-btn" (click)="openContactForm()">Être contacté par 2MK</button> -->
+       <button class="uc-btn" (click)="openContactForm()">Être contacté par 2MK</button>
+
+      <!-- Modale avec le formulaire -->
+      <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeContactForm()"></div>
+
+      <div class="modal" *ngIf="isModalOpen">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+          <img src="assets/ban_2mk.png" alt="Contact" class="modal-header-img" />
+          <h2>Formulaire de contact</h2>
+          <app-contact></app-contact>
+          <button (click)="closeContactForm()">Fermer</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
