@@ -1,0 +1,130 @@
+.under-construction-container {
+  display: flex;
+  min-height: 100vh;
+  background: #f8f9fa; // blanc cassé
+}
+
+.uc-left {
+  flex: 1;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.uc-profile {
+  text-align: center;
+}
+
+.uc-avatar {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+//   border: 4px solid #e0e0e0;
+}
+
+.uc-text {
+  margin-bottom: 2rem;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.uc-socials {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  font-size: 2rem;
+}
+
+.uc-socials a {
+  color: #333;
+  transition: color 0.2s;
+}
+
+.uc-socials a:hover {
+  color: #007bff;
+}
+
+.uc-right {
+  flex: 2;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.uc-bg-image {
+  position: absolute;
+  inset: 0;
+  background: url('../../../assets/Montagne.png') center/cover no-repeat;
+  opacity: 0.18;
+  z-index: 1;
+}
+
+.uc-content {
+  position: relative;
+  z-index: 2;
+  text-align: left;
+  max-width: 600px;
+  margin-left: 3rem;
+}
+
+.uc-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.uc-content h2 {
+  font-size: 1.5rem;
+  margin-bottom: 2.5rem;
+  color: #444;
+  font-weight: 400;
+}
+
+.uc-btn {
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.uc-btn:hover {
+  background: #0056b3;
+}
+
+.uc-phone-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.uc-tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -2.2rem;
+  background: #28a745;
+  color: #fff;
+  padding: 0.3rem 1rem;
+  border-radius: 1rem;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  opacity: 0.95;
+  pointer-events: none;
+  z-index: 10;
+  animation: fadeInOut 1.5s;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { opacity: 0; }
+}

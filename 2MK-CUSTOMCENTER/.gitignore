@@ -40,3 +40,12 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Local env files
+.env
+.env.*
+
+lcov-report/
+*.tsbuildinfo
+yarn-debug.log*
+npm-debug.log*

@@ -1,0 +1,34 @@
+<div class="under-construction-container">
+  <div class="uc-left">
+    <div class="uc-profile">
+      <img src="assets/ton-image.png" alt="2MK" class="uc-avatar" />
+      <div class="uc-text">
+        <p>
+          Notre site web est en construction.<br>
+          Vous voulez en savoir plus sur nous ?<br>
+          Nous partager votre projet ?<br>
+          Ou juste nous passer le bonjour ?<br>
+          N'hésitez pas à nous contacter sur nos réseaux sociaux ou à nous partager vos coordonnées via ce formulaire.
+        </p>
+      </div>
+      <div class="uc-socials">
+        <a href="https://www.facebook.com/share/1CQ3TkhGgN/?mibextid=wwXIfr" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/2mkcustomcenter/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <span class="uc-phone-wrapper" style="position: relative;">
+          <a (click)="copyPhone()" style="cursor:pointer;" aria-label="Téléphone">
+            <i class="fas fa-phone"></i>
+          </a>
+          <span class="uc-tooltip" *ngIf="showTooltip">Numéro copié !</span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="uc-right">
+    <div class="uc-bg-image"></div>
+    <div class="uc-content">
+      <h1>Site en construction</h1>
+      <h2>Nous travaillons dur en ce moment pour vous fournir la meilleure expérience ici</h2>
+      <button class="uc-btn" (click)="openContactForm()">Être contacté par 2MK</button>
+    </div>
+  </div>
+</div>
