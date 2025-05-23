@@ -1,0 +1,56 @@
+<!-- <form #contactForm="ngForm" (ngSubmit)="sendEmail(contactForm)">
+  <label for="user_name">Nom :</label>
+  <input
+    type="text"
+    name="user_name"
+    ngModel
+    required
+    placeholder="Votre nom"
+  />
+
+  <label for="user_email">Email :</label>
+  <input
+    type="email"
+    name="user_email"
+    ngModel
+    required
+    placeholder="Votre email"
+  />
+
+  <label for="message">Message :</label>
+  <textarea
+    name="message"
+    ngModel
+    required
+    placeholder="Votre message"
+  ></textarea>
+
+  <button type="submit" [disabled]="contactForm.invalid">Envoyer</button>
+</form> -->
+
+
+<form #contactForm="ngForm" (ngSubmit)="send(contactForm)">
+  <input type="text" name="name" [(ngModel)]="contact.name" placeholder="Votre nom" required maxlength="100" />
+
+  <input
+    type="email"
+    name="email"
+    [(ngModel)]="contact.email"
+    placeholder="Votre email"
+    required
+    maxlength="100"
+    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(fr|com|net|org|edu|gov|info|io|co|biz|me|pro|tv|xyz|be|ch|uk|us|ca|de|es|it|nl|pt|ru|pl|cz|gr|fi|se|no|dk|jp|cn|in|br|au|za)$"
+    #emailRef="ngModel"
+  />
+  <div *ngIf="contactForm.submitted && emailRef.invalid" style="color:#dc3545; font-size:0.95em;">
+    Email invalide (ex: nom&#64;domaine.fr)
+  </div>
+
+  <textarea name="message" [(ngModel)]="contact.message" placeholder="Votre message" required maxlength="1000"></textarea>
+
+  <button type="submit" [disabled]="contactForm.invalid || sending">
+    {{ sending ? 'Envoi...' : 'Envoyer' }}
+  </button>
+  <div *ngIf="sent" style="color: #28a745; margin-top: 1rem;">Message envoyé ! Merci 😊</div>
+  <div *ngIf="error" style="color: #dc3545; margin-top: 1rem;">{{ error }}</div>
+</form>

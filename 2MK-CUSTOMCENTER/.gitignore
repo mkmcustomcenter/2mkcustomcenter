@@ -49,3 +49,6 @@ lcov-report/
 *.tsbuildinfo
 yarn-debug.log*
 npm-debug.log*
+
+# emailJS dev & prod
+src/environments/environment*.ts
