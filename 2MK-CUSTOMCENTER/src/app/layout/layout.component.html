@@ -13,12 +13,12 @@
 
     <nav class="main-nav">
       <a (click)="scrollToSection('intro')">Accueil</a>
-      <a (click)="scrollToSection('presentation')">Présentation</a>
+      <!-- <a (click)="scrollToSection('presentation')">Présentation</a> -->
       <a (click)="scrollToSection('prestations')">Prestations</a>
       <a (click)="scrollToSection('galerie')">Galerie</a>
-      <a (click)="scrollToSection('reservation')">Réservation</a>
-      <a (click)="scrollToSection('evenements')">Événements</a>
       <a (click)="scrollToSection('contact')">Contact</a>
+      <!-- <a (click)="scrollToSection('reservation')">Réservation</a> -->
+      <a (click)="scrollToSection('evenements')">Événements</a>
       <a (click)="scrollToSection('mentions')">Mentions</a>
     </nav>
   </header>
@@ -36,6 +36,10 @@
       <app-prestation></app-prestation>
     </section>
 
+    <section id="contact">
+      <app-contact></app-contact>
+    </section>
+
     <section id="galerie">
       <app-galerie></app-galerie>
     </section>
@@ -46,10 +50,6 @@
 
     <section id="evenements">
       <app-evenements></app-evenements>
-    </section>
-
-    <section id="contact">
-      <app-contact></app-contact>
     </section>
 
     <section id="mentions">

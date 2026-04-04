@@ -1,0 +1,231 @@
+// Charte graphique 2MK
+$bleu-nuit: #1A3C63;
+$beige-clair: #F4E1C1;
+$orange-peche: #F8B784;
+$blanc-casse: #FCF9F5;
+$gris-texte: #555;
+$gris-clair: #f0f0f0;
+$coquille-oeuf: #F0EAD6;
+
+.prestation-container {
+  background-color: $blanc-casse;
+  padding: 2rem 1.5rem;
+  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+
+  .header-section {
+    text-align: center;
+    margin-bottom: 3rem;
+
+    h2 {
+      font-family: 'Lobster', cursive;
+      font-size: 2rem;
+      font-weight: 400;
+      color: $bleu-nuit;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    .description {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: $gris-texte;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+  }
+
+  .services {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+
+    .service-item {
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(26, 60, 99, 0.08), 0 8px 20px rgba(26, 60, 99, 0.12), 0 15px 35px rgba(26, 60, 99, 0.15);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 4px 12px rgba(26, 60, 99, 0.12), 0 12px 28px rgba(26, 60, 99, 0.18), 0 20px 45px rgba(26, 60, 99, 0.22);
+      }
+
+      .card-header {
+        background: linear-gradient(135deg, $bleu-nuit 0%, #2a5a8a 100%);
+        padding: 1.5rem;
+        color: $beige-clair;
+
+        h3 {
+          font-family: 'Lobster', cursive;
+          font-size: 1.5rem;
+          font-weight: 400;
+          margin: 0;
+          letter-spacing: -0.3px;
+        }
+      }
+
+      .accroche {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.1rem;
+        color: $orange-peche;
+        font-style: italic;
+        font-weight: 600;
+        padding: 1.5rem 1.5rem 0;
+        margin: 0 0 1rem 0;
+      }
+
+      .description-content {
+        flex-grow: 1;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 400;
+        color: $gris-texte;
+        padding: 0 1.5rem;
+        line-height: 1.7;
+
+        p {
+          margin: 0 0 0.75rem 0;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      .services-list {
+        padding: 1.5rem;
+        background-color: $gris-clair;
+        margin-top: 1rem;
+
+        h4 {
+          font-family: 'Lobster', cursive;
+          font-size: 1rem;
+          font-weight: 400;
+          color: $bleu-nuit;
+          margin: 0 0 1rem 0;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+
+          li {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: $gris-texte;
+            margin-bottom: 0.75rem;
+            padding-left: 1.75rem;
+            position: relative;
+            line-height: 1.5;
+
+            &:before {
+              content: "◆";
+              position: absolute;
+              left: 0;
+              color: $orange-peche;
+              font-weight: bold;
+              font-size: 0.8rem;
+            }
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+
+      .tarifs {
+        padding: 1.5rem;
+        background-color: rgba(248, 183, 132, 0.1);
+        border-top: 2px solid $beige-clair;
+
+        h4 {
+          font-family: 'Lobster', cursive;
+          font-size: 1rem;
+          font-weight: 400;
+          color: $bleu-nuit;
+          margin: 0 0 0.75rem 0;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        p {
+          font-family: 'Montserrat', sans-serif;
+          font-size: 0.95rem;
+          color: $orange-peche;
+          font-weight: 600;
+          margin: 0;
+          line-height: 1.6;
+        }
+      }
+
+      .btn-service {
+        font-family: 'Montserrat', sans-serif;
+        background: linear-gradient(135deg, $bleu-nuit 0%, #2a5a8a 100%);
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        margin: 1.5rem;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 8px rgba(26, 60, 99, 0.2);
+
+        &:hover {
+          background: linear-gradient(135deg, #142d4a 0%, #1f4466 100%);
+          box-shadow: 0 6px 12px rgba(26, 60, 99, 0.3);
+          transform: translateY(-2px);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+}
+
+/* Sur écran plus large, on met les services côte à côte */
+@media (min-width: 768px) {
+  .prestation-container {
+    .services {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: stretch;
+
+      .service-item {
+        height: 100%;
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .prestation-container {
+    .header-section {
+      margin-bottom: 4rem;
+
+      h2 {
+        font-size: 2.5rem;
+      }
+    }
+  }
+}

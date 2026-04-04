@@ -50,5 +50,7 @@ lcov-report/
 yarn-debug.log*
 npm-debug.log*
 
-# emailJS dev & prod
-src/environments/environment*.ts
+# Environment files - Ignore real files but keep example
+src/environments/environment.ts
+src/environments/environment.prod.ts
+!src/environments/environment.example.ts
