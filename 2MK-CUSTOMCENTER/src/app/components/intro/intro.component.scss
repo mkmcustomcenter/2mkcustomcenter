@@ -1,0 +1,149 @@
+// Variables de couleurs
+$primary-blue: #3a6fb0;
+$dark-blue: #14244b;
+$black: #121212;
+$light-text: #f0f0f0;
+$muted-text: #cccccc;
+$cream: #ffe7b2;
+
+$gradient-angle: 270deg;
+$transition-duration: 0.3s;
+$animation-duration: 15s;
+
+// Conteneur principal
+.intro-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  
+  background: linear-gradient(
+    $gradient-angle,
+    $primary-blue,
+    $dark-blue,
+    $black,
+    $black,
+    $dark-blue,
+    $primary-blue
+  );
+  background-size: 800% 800%;
+  animation: gradientMove $animation-duration ease infinite;
+  
+  color: $light-text;
+  text-align: center;
+  overflow: hidden;
+}
+
+// Logo
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  .logo {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    transition: 
+      width 1.5s cubic-bezier(0.77, 0, 0.18, 1),
+      transform 1.5s cubic-bezier(0.77, 0, 0.18, 1);
+    transform: translate(0, 0);
+  }
+}
+
+// Texte descriptif
+.subtitle {
+  font-size: 1.1rem;
+  margin: 0 1rem 2rem 1rem;
+  color: $muted-text;
+  max-width: 600px;
+}
+
+// Bouton d'entrée
+.btn-enter {
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: $primary-blue;
+  border: 2px solid $dark-blue;
+  border-radius: 50px;
+  color: $cream;
+  cursor: pointer;
+  letter-spacing: 1px;
+  
+  box-shadow: 0 12px 32px rgba($dark-blue, 0.18);
+  transform: translateY(-4px) scale(1.02);
+  
+  transition: 
+    background $transition-duration,
+    transform 0.2s,
+    box-shadow $transition-duration,
+    border-color $transition-duration;
+
+  -webkit-text-stroke: 1px $primary-blue;
+  text-shadow: 0 0 2px $primary-blue;
+
+  &:hover {
+    background: $dark-blue;
+    border-color: $primary-blue;
+    transform: translateY(-6px) scale(1.04);
+    box-shadow: 0 16px 40px rgba($dark-blue, 0.22);
+    outline: none;
+  }
+
+  &:active {
+    transform: translateY(-2px) scale(0.98);
+  }
+}
+
+// Animation dégradé
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+// ============= RESPONSIVE =============
+
+// Tablettes et plus (min-width: 768px)
+@media (min-width: 768px) {
+  .intro-container {
+    padding: 2rem;
+
+    .subtitle {
+      font-size: 1.3rem;
+    }
+
+    .btn-enter {
+      font-size: 1.3rem;
+      padding: 1rem 3rem;
+    }
+
+    .logo-wrapper .logo {
+      width: 400px;
+    }
+  }
+}
+
+// Desktop (min-width: 1024px)
+@media (min-width: 1024px) {
+  .intro-container {
+    .subtitle {
+      font-size: 1.5rem;
+    }
+
+    .btn-enter {
+      font-size: 1.5rem;
+      padding: 1.2rem 4rem;
+    }
+
+    .logo-wrapper .logo {
+      width: 500px;
+    }
+  }
+}

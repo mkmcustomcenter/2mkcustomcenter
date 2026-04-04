@@ -141,6 +141,27 @@ src/
 
 ---
 
+## 🚀 Deployment
+
+To deploy the application to GitHub Pages with a custom domain:
+
+```bash
+ng deploy --cname=2kmcustomcenter.fr
+```
+
+This command will:
+- Build the application in production mode
+- Create or update the `gh-pages` branch
+- Push the built files to GitHub Pages
+- Configure the custom domain
+
+### Important Notes:
+- Make sure your DNS settings point to `<username>.github.io`
+- The deployment will reflect the current branch you're on
+- The `gh-pages` branch will be updated with the build output
+
+---
+
 ## 📝 License
 
 Personal / educational project – Free to reuse with attribution.

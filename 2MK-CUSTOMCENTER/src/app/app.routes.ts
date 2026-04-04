@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { UnderConstructionComponent } from './components/under-construction/under-construction.component';
 
 export const routes: Routes = [
-  { path: '', component: UnderConstructionComponent }
+  { path: '', loadComponent: () => import('./layout/layout.component').then(m => m.LayoutComponent) },
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
