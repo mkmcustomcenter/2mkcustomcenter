@@ -1,0 +1,217 @@
+<div class="page-container">
+  <div class="mentions-container">
+    <div class="header-section">
+    <h2>Mentions Légales de 2MK Custom Center</h2>
+    <p class="description">Retrouvez ci-dessous les mentions légales, informations RGPD et conditions de prestation. Chaque section est dépliable pour une lecture plus claire.</p>
+  </div>
+
+  <div class="mentions-toolbar">
+    <button class="toggle-all-button" type="button" (click)="toggleAllSections()">
+      {{ areAllSectionsOpen() ? 'Tout fermer' : 'Tout ouvrir' }}
+    </button>
+  </div>
+
+  <div class="mentions-content">
+    <div class="accordion-item" [class.open]="isOpen(1)">
+      <button class="accordion-trigger" type="button" (click)="toggleSection(1)" [attr.aria-expanded]="isOpen(1)">
+        <span class="title">1. Mentions légales</span>
+        <span class="icon" [class.open]="isOpen(1)">⌄</span>
+      </button>
+
+      <div class="accordion-panel" [class.open]="isOpen(1)">
+        <div class="panel-inner">
+          <h4>Éditeur du site</h4>
+          <ul>
+            <li><strong>Nom de l’entreprise :</strong> 2MK Custom Center</li>
+            <li><strong>Forme juridique :</strong> SARL</li>
+            <li><strong>Capital social :</strong> 2 000 €</li>
+            <li><strong>Adresse du siège :</strong> 312 rue des Meunières, 38660 Saint-Vincent-de-Mercuze, France</li>
+            <li><strong>SIREN :</strong> 937 716 892</li>
+            <li><strong>SIRET :</strong> 937 716 892 00016</li>
+            <li><strong>RCS :</strong> Grenoble</li>
+            <li><strong>TVA intracommunautaire :</strong> FR47937716892</li>
+          </ul>
+
+          <h4>Responsables de publication</h4>
+          <ul>
+            <li>Mathis MANSON – Gérant</li>
+            <li>Liam MELLOULI-KHELID – Gérant</li>
+          </ul>
+
+          <h4>Contact</h4>
+          <ul>
+            <li><strong>Email :</strong> <a href="mailto:mkm38@outlook.fr">mkm38&#64;outlook.fr</a></li>
+            <li><strong>Téléphone :</strong> <a href="tel:+33480159966">+33 4 80 15 99 66</a></li>
+            <li><strong>Adresse :</strong> 312 rue des Meunières, 38660 Saint-Vincent-de-Mercuze</li>
+          </ul>
+
+          <h4>Hébergement</h4>
+          <ul>
+            <li><strong>Hébergeur :</strong> GitHub (GitHub Pages)</li>
+            <li><strong>Adresse :</strong> 88 Colin P Kelly Jr St, San Francisco, CA, États-Unis</li>
+          </ul>
+
+          <h4>Services tiers utilisés</h4>
+          <ul>
+            <li><strong>EmailJS :</strong> service utilisé pour l’envoi des messages du formulaire de contact et de certaines notifications liées à l’administration.</li>
+            <li><strong>Font Awesome via CDNJS :</strong> bibliothèque d’icônes chargée depuis un service CDN externe.</li>
+          </ul>
+
+          <h4>Nom de domaine</h4>
+          <ul>
+            <li><strong>Registraire :</strong> OVH</li>
+            <li><strong>Adresse :</strong> 2 rue Kellermann, 59100 Roubaix, France</li>
+          </ul>
+
+          <h4>Activité</h4>
+          <ul>
+            <li>Sellerie automobile (réparation, personnalisation)</li>
+            <li>Covering automobile (pose de films adhésifs)</li>
+            <li>Entretien et réparation de véhicules</li>
+            <li><strong>Code APE :</strong> 45.20A – Entretien et réparation de véhicules automobiles légers</li>
+          </ul>
+
+          <h4>Propriété intellectuelle</h4>
+          <ul>
+            <li>Tous les contenus du site (textes, images, logo, éléments graphiques) sont protégés.</li>
+            <li>Toute reproduction, modification ou diffusion sans autorisation est interdite.</li>
+          </ul>
+
+          <h4>Responsabilité</h4>
+          <ul>
+            <li>Les informations diffusées sont fournies à titre indicatif.</li>
+            <li>Elles peuvent être modifiées à tout moment.</li>
+            <li>L’entreprise ne peut être tenue responsable des erreurs ou omissions.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" [class.open]="isOpen(2)">
+      <button class="accordion-trigger" type="button" (click)="toggleSection(2)" [attr.aria-expanded]="isOpen(2)">
+        <span class="title">2. Données personnelles (RGPD)</span>
+        <span class="icon" [class.open]="isOpen(2)">⌄</span>
+      </button>
+
+      <div class="accordion-panel" [class.open]="isOpen(2)">
+        <div class="panel-inner">
+          <h4>Données collectées</h4>
+          <ul>
+            <li>Nom</li>
+            <li>Email</li>
+            <li>Message</li>
+          </ul>
+
+          <h4>Finalité</h4>
+          <ul>
+            <li>Prise de contact</li>
+            <li>Réponse aux demandes</li>
+            <li>Établissement de devis</li>
+            <li>Gestion de la relation client</li>
+          </ul>
+
+          <h4>Conservation</h4>
+          <p>Les données sont conservées uniquement le temps nécessaire à la relation commerciale.</p>
+
+          <h4>Destinataires et sous-traitants</h4>
+          <ul>
+            <li>Les données envoyées via le formulaire de contact transitent par le service EmailJS avant transmission au destinataire de l’entreprise.</li>
+            <li>L’hébergement du site est assuré via GitHub Pages.</li>
+          </ul>
+
+          <h4>Droits des utilisateurs</h4>
+          <p>Chaque utilisateur dispose des droits suivants :</p>
+          <ul>
+            <li>Accès à ses données</li>
+            <li>Rectification</li>
+            <li>Suppression</li>
+            <li>Opposition au traitement</li>
+          </ul>
+
+          <h4>Contact RGPD</h4>
+          <p><strong>Email :</strong> <a href="mailto:mkm38@outlook.fr">mkm38&#64;outlook.fr</a></p>
+
+          <h4>Cookies</h4>
+          <p>Le site n’utilise pas de cookies de mesure d’audience ni de traceurs publicitaires.</p>
+
+          <h4>Stockage local du navigateur</h4>
+          <p>Le site peut utiliser le stockage local du navigateur pour des besoins strictement techniques et fonctionnels. Ce stockage ne constitue pas un traceur publicitaire ou de mesure d’audience.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" [class.open]="isOpen(3)">
+      <button class="accordion-trigger" type="button" (click)="toggleSection(3)" [attr.aria-expanded]="isOpen(3)">
+        <span class="title">3. Conditions de prestation</span>
+        <span class="icon" [class.open]="isOpen(3)">⌄</span>
+      </button>
+
+      <div class="accordion-panel" [class.open]="isOpen(3)">
+        <div class="panel-inner">
+          <h4>Objet</h4>
+          <p>Encadrer les prestations de covering et de sellerie automobile proposées par 2MK Custom Center.</p>
+
+          <h4>Devis</h4>
+          <ul>
+            <li>Toute prestation fait l’objet d’un devis préalable.</li>
+            <li>Validité du devis : 30 jours.</li>
+            <li>La validation du devis vaut acceptation.</li>
+          </ul>
+
+          <h4>État du véhicule</h4>
+          <p>Le client doit fournir un véhicule propre et en bon état apparent. L’entreprise ne peut être tenue responsable :</p>
+          <ul>
+            <li>des défauts existants</li>
+            <li>d’une peinture fragilisée</li>
+            <li>de l’usure préalable</li>
+          </ul>
+
+          <h4>Covering automobile</h4>
+          <p>Le résultat dépend de l’état du support, de la peinture d’origine et des conditions techniques. Des variations peuvent apparaître :</p>
+          <ul>
+            <li>teinte</li>
+            <li>finition</li>
+            <li>tenue dans le temps</li>
+          </ul>
+
+          <h4>Sellerie</h4>
+          <p>Les matériaux (cuir, tissus) peuvent présenter des variations naturelles et des différences de teinte. Le travail étant artisanal, de légères variations sont possibles.</p>
+
+          <h4>Délais</h4>
+          <p>Les délais sont donnés à titre indicatif. Ils peuvent varier selon :</p>
+          <ul>
+            <li>la complexité</li>
+            <li>les contraintes techniques</li>
+            <li>la charge de travail</li>
+          </ul>
+
+          <h4>Responsabilité</h4>
+          <p>Responsabilité limitée à la prestation réalisée. Aucune indemnisation pour :</p>
+          <ul>
+            <li>immobilisation du véhicule</li>
+            <li>perte d’usage</li>
+            <li>dommages indirects</li>
+          </ul>
+
+          <h4>Annulation</h4>
+          <p>Un acompte peut être demandé pour valider une prestation. En cas d’annulation, celui-ci peut ne pas être remboursé.</p>
+
+          <h4>Acceptation</h4>
+          <p>Toute validation de devis implique l’acceptation des présentes conditions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button
+    class="back-to-top"
+    type="button"
+    (click)="scrollToTop()"
+    [class.visible]="showBackToTop"
+    [attr.aria-hidden]="!showBackToTop"
+    aria-label="Revenir en haut de la page"
+  >
+    ↑
+  </button>
+  </div>
+</div>

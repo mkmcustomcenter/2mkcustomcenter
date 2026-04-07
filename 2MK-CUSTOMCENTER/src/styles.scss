@@ -1,6 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
   overflow: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+// Premium text selection
+::selection {
+  background: rgba(248, 183, 132, 0.3);
+  color: #1A3C63;
+}
+
+::-moz-selection {
+  background: rgba(248, 183, 132, 0.3);
+  color: #1A3C63;
+}
+
+// Premium scrollbar for inner sections
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(26, 60, 99, 0.15);
+  border-radius: 3px;
+
+  &:hover {
+    background: rgba(26, 60, 99, 0.28);
+  }
+}
+
+// Page container - unified padding for all pages
+.page-container {
+  padding: 2rem 1.5rem;
+  background-color: #FCF9F5;
+  min-height: 100vh;
 }

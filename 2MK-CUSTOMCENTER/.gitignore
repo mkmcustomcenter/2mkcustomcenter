@@ -49,3 +49,8 @@ lcov-report/
 *.tsbuildinfo
 yarn-debug.log*
 npm-debug.log*
+
+# Environment files - Ignore real files but keep example
+src/environments/environment.ts
+src/environments/environment.prod.ts
+!src/environments/environment.example.ts

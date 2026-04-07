@@ -1,0 +1,120 @@
+// Charte graphique 2MK
+$bleu-nuit: #1A3C63;
+$beige-clair: #F4E1C1;
+$orange-peche: #F8B784;
+$blanc-casse: #FCF9F5;
+$gris-texte: #555;
+$gris-clair: #f0f0f0;
+
+.evenements-container {
+  background-color: $blanc-casse;
+  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+
+  .header-section {
+    text-align: center;
+    margin-bottom: 3rem;
+
+    h2 {
+      font-family: 'Lobster', cursive;
+      font-size: 2rem;
+      font-weight: 400;
+      color: $bleu-nuit;
+      margin: 0 0 1.5rem 0;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    .description {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: $gris-texte;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+  }
+
+  .evenements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .event-card {
+    background-color: white;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(26, 60, 99, 0.06);
+    box-shadow: 
+      0 1px 3px rgba(26, 60, 99, 0.04),
+      0 4px 12px rgba(26, 60, 99, 0.06),
+      0 12px 28px rgba(26, 60, 99, 0.08);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      border-color: rgba(248, 183, 132, 0.18);
+      box-shadow: 
+        0 2px 6px rgba(26, 60, 99, 0.06),
+        0 8px 20px rgba(26, 60, 99, 0.08),
+        0 20px 44px rgba(26, 60, 99, 0.12);
+    }
+
+    .event-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .event-content {
+      padding: 1.5rem;
+
+      h3 {
+        font-family: 'Lobster', cursive;
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: $bleu-nuit;
+        margin: 0 0 0.75rem 0;
+        letter-spacing: -0.3px;
+        line-height: 1.2;
+      }
+
+      .event-date {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.9rem;
+        color: $orange-peche;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.95rem;
+        color: $gris-texte;
+        line-height: 1.7;
+        margin: 0;
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .evenements-container {
+    .header-section {
+      margin-bottom: 4rem;
+
+      h2 {
+        font-size: 2.5rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,135 @@
+// Charte graphique 2MK
+$bleu-nuit: #1A3C63;
+$beige-clair: #F4E1C1;
+$orange-peche: #F8B784;
+$blanc-casse: #FCF9F5;
+$gris-texte: #555;
+$gris-clair: #f0f0f0;
+
+.reservation-container {
+  background-color: $blanc-casse;
+  padding: 2rem 1.5rem;
+  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+
+  .reservation-header {
+    text-align: center;
+    margin-bottom: 3rem;
+
+    h2 {
+      font-family: 'Lobster', cursive;
+      font-size: 2rem;
+      font-weight: 400;
+      color: $bleu-nuit;
+      margin: 0 0 1.5rem 0;
+      letter-spacing: -0.5px;
+    }
+
+    p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: $gris-texte;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+  }
+
+  .reservation-form {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(26, 60, 99, 0.08), 0 8px 20px rgba(26, 60, 99, 0.12), 0 15px 35px rgba(26, 60, 99, 0.15);
+    max-width: 600px;
+    margin: 0 auto;
+
+    .form-group {
+      margin-bottom: 1.5rem;
+
+      label {
+        display: block;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: $bleu-nuit;
+        margin-bottom: 0.5rem;
+      }
+
+      input, textarea, select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid $gris-clair;
+        border-radius: 6px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.95rem;
+        color: $gris-texte;
+        transition: border-color 0.3s ease;
+
+        &:focus {
+          outline: none;
+          border-color: $orange-peche;
+          box-shadow: 0 0 0 3px rgba(248, 183, 132, 0.15);
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+    }
+
+    button {
+      width: 100%;
+      background: linear-gradient(135deg, $bleu-nuit 0%, #2a5a8a 100%);
+      color: $beige-clair;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(26, 60, 99, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(26, 60, 99, 0.3);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .reservation-info {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(26, 60, 99, 0.08), 0 8px 20px rgba(26, 60, 99, 0.12), 0 15px 35px rgba(26, 60, 99, 0.15);
+    max-width: 600px;
+    margin: 2rem auto 0;
+
+    h3 {
+      font-family: 'Lobster', cursive;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: $bleu-nuit;
+      margin: 0 0 1rem 0;
+      letter-spacing: -0.3px;
+    }
+
+    p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      color: $gris-texte;
+      line-height: 1.6;
+      margin: 0;
+    }
+  }
+}

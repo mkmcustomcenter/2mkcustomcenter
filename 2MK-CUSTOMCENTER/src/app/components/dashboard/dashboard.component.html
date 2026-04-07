@@ -1,0 +1,374 @@
+<div class="dashboard-container" [class.authenticated]="isAuthenticated">
+  <!-- LOGIN SCREEN -->
+  <div class="login-screen" *ngIf="!isAuthenticated">
+    <div class="login-box">
+      <h1>🔐 Accès Administrateur</h1>
+      <p>Entrez votre mot de passe pour continuer</p>
+      
+      <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" class="login-form">
+        <div class="form-group">
+          <label for="password">Mot de passe *</label>
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            class="form-input"
+            placeholder="Entrez le mot de passe"
+            [disabled]="isLocked"
+            autofocus
+          />
+          <span class="error-message" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            Le mot de passe est requis
+          </span>
+        </div>
+
+        <button 
+          type="submit" 
+          class="btn-submit" 
+          [disabled]="isLocked"
+        >
+          Se connecter
+        </button>
+      </form>
+
+      <!-- Lien Mot de passe oublié -->
+      <div class="forgot-password-link">
+        <button 
+          type="button"
+          (click)="onRequestPasswordResetFromLogin()" 
+          class="link-btn" 
+          *ngIf="!isRequestingReset"
+          [disabled]="false"
+        >
+          Mot de passe oublié?
+        </button>
+        <span class="resetting-text" *ngIf="isRequestingReset">📧 Envoi en cours...</span>
+      </div>
+
+      <!-- Message de confirmation -->
+      <div class="message-box" *ngIf="resetRequestMessage" [ngClass]="resetRequestMessage.includes('✅') ? 'success' : 'error'">
+        {{ resetRequestMessage }}
+      </div>
+
+      <div class="login-info" *ngIf="!isLocked">
+        <p>Tentatives: <strong>{{ loginAttempt }}/{{ maxAttempts }}</strong></p>
+      </div>
+
+      <div class="locked-message" *ngIf="isLocked">
+        <p>⏸️ Compte verrouillé après {{ maxAttempts }} tentatives échouées.</p>
+        <p>Veuillez réessayer dans 5 minutes.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD CONTENT -->
+  <div class="dashboard-header" *ngIf="isAuthenticated">
+    <div class="header-top">
+      <h1>Dashboard Administrateur</h1>
+      <button class="btn-logout" (click)="onLogout()" title="Déconnexion">🚪 Déconnexion</button>
+    </div>
+    <p>Gérez la galerie et les événements</p>
+  </div>
+
+  <div class="dashboard-content" *ngIf="isAuthenticated">
+    <!-- SECTION SÉCURITÉ -->
+    <div class="dashboard-section security-section">
+      <div class="section-header">
+        <h2>🔒 Sécurité</h2>
+      </div>
+
+      <!-- Buttons de sécurité -->
+      <div class="security-buttons">
+        <button class="btn-security" (click)="togglePasswordSection()" type="button">
+          🔑 Changer le mot de passe
+        </button>
+        <button class="btn-security btn-reset" (click)="onRequestPasswordReset()" [disabled]="isRequestingReset" type="button">
+          <span *ngIf="!isRequestingReset">📧 Mot de passe oublié?</span>
+          <span *ngIf="isRequestingReset">Envoi en cours...</span>
+        </button>
+      </div>
+
+      <!-- Messages de feedback -->
+      <div class="message-box" *ngIf="resetRequestMessage" [ngClass]="resetRequestMessage.includes('✅') ? 'success' : 'error'">
+        {{ resetRequestMessage }}
+      </div>
+
+      <!-- Formulaire de changement de mot de passe -->
+      <div class="password-form-container" *ngIf="showPasswordSection">
+        <form [formGroup]="changePasswordForm" (ngSubmit)="onChangePassword()" class="change-password-form">
+          <div class="form-group">
+            <label for="current-password">Mot de passe actuel *</label>
+            <input
+              id="current-password"
+              type="password"
+              formControlName="currentPassword"
+              class="form-input"
+              placeholder="Entrez votre mot de passe actuel"
+              [disabled]="isChangingPassword"
+            />
+            <span class="error-message" *ngIf="changePasswordForm.get('currentPassword')?.invalid && changePasswordForm.get('currentPassword')?.touched">
+              Le mot de passe est requis
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="new-password">Nouveau mot de passe *</label>
+            <input
+              id="new-password"
+              type="password"
+              formControlName="newPassword"
+              class="form-input"
+              placeholder="Minimum 6 caractères"
+              [disabled]="isChangingPassword"
+            />
+            <span class="error-message" *ngIf="changePasswordForm.get('newPassword')?.invalid && changePasswordForm.get('newPassword')?.touched">
+              Le mot de passe doit contenir au moins 6 caractères
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="confirm-password">Confirmer le nouveau mot de passe *</label>
+            <input
+              id="confirm-password"
+              type="password"
+              formControlName="confirmPassword"
+              class="form-input"
+              placeholder="Confirmez votre nouveau mot de passe"
+              [disabled]="isChangingPassword"
+            />
+            <span class="error-message" *ngIf="changePasswordForm.get('confirmPassword')?.invalid && changePasswordForm.get('confirmPassword')?.touched">
+              Veuillez confirmer votre mot de passe
+            </span>
+
+            <span class="error-message" *ngIf="changePasswordForm.hasError('passwordMismatch') && changePasswordForm.get('confirmPassword')?.touched">
+              Les mots de passe ne correspondent pas
+            </span>
+          </div>
+
+          <div class="form-buttons">
+            <button type="submit" class="btn-submit" [disabled]="changePasswordForm.invalid || isChangingPassword">
+              {{ isChangingPassword ? 'Changement en cours...' : 'Mettre à jour' }}
+            </button>
+            <button type="button" class="btn-cancel" (click)="togglePasswordSection()" [disabled]="isChangingPassword">
+              Annuler
+            </button>
+          </div>
+
+          <div class="message-box" *ngIf="passwordChangeMessage" [ngClass]="passwordChangeMessage.includes('✅') ? 'success' : 'error'">
+            {{ passwordChangeMessage }}
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- SECTION GALERIE -->
+    <div class="dashboard-section">
+      <div class="section-header">
+        <h2>Gestion de la Galerie</h2>
+        <span class="count-badge">{{ galerieImages.length }} image(s)</span>
+      </div>
+
+      <!-- Formulaire Galerie -->
+      <form [formGroup]="galerieForm" (ngSubmit)="onGalerieSubmit()" class="dashboard-form">
+        <div class="form-group">
+          <label for="galerie-titre">Titre de l'image *</label>
+          <input
+            id="galerie-titre"
+            type="text"
+            formControlName="titre"
+            class="form-input"
+            placeholder="Ex: Covering Premium"
+          />
+          <span class="error-message" *ngIf="galerieForm.get('titre')?.invalid && galerieSubmitted">
+            Le titre est requis (min 3 caractères)
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="galerie-description">Description *</label>
+          <textarea
+            id="galerie-description"
+            formControlName="description"
+            class="form-textarea"
+            placeholder="Décrivez l'image..."
+            rows="3"
+          ></textarea>
+          <span class="error-message" *ngIf="galerieForm.get('description')?.invalid && galerieSubmitted">
+            La description est requise
+          </span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="galerie-file">Image depuis votre ordinateur *</label>
+            <div class="file-upload-control">
+              <input
+                id="galerie-file"
+                type="file"
+                accept="image/*"
+                class="file-input-hidden"
+                (change)="onGalerieFileSelected($event)"
+              />
+              <label for="galerie-file" class="file-upload-button">📁 Choisir une image</label>
+            </div>
+            <small class="helper-text" *ngIf="selectedGalerieFileName">
+              Fichier sélectionné : {{ selectedGalerieFileName }}
+            </small>
+            <div class="image-preview" *ngIf="galerieImagePreview">
+              <img [src]="galerieImagePreview" alt="Aperçu image galerie" />
+            </div>
+            <span class="error-message" *ngIf="galerieForm.get('imageUrl')?.invalid && galerieSubmitted">
+              Veuillez sélectionner une image
+            </span>
+          </div>
+        </div>
+
+        <div class="form-row category-row">
+          <div class="form-group">
+            <label for="galerie-categorie">Catégorie *</label>
+            <div class="custom-select-control">
+              <select id="galerie-categorie" formControlName="categorie" class="form-select custom-select">
+                <option value="">Sélectionnez une catégorie</option>
+                <option value="covering">Covering</option>
+                <option value="sellerie">Sellerie</option>
+                <option value="portfolio">Portfolio</option>
+              </select>
+            </div>
+            <span class="error-message" *ngIf="galerieForm.get('categorie')?.invalid && galerieSubmitted">
+              La catégorie est requise
+            </span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit">+ Ajouter l'image</button>
+      </form>
+
+      <!-- Liste des images -->
+      <div class="items-list" *ngIf="galerieImages.length > 0">
+        <h3>Images existantes</h3>
+        <div class="items-grid">
+          <div class="item-card" *ngFor="let image of galerieImages">
+            <div class="item-header">
+              <h4>{{ image.titre }}</h4>
+              <span class="category-badge">{{ image.categorie }}</span>
+            </div>
+            <p class="item-description">{{ image.description }}</p>
+            <div class="item-image" *ngIf="image.imageUrl">
+              <img [src]="image.imageUrl" [alt]="image.titre" />
+            </div>
+            <p class="item-url" [class.item-url-local]="isDataImageUrl(image.imageUrl)">
+              {{ getImageSourceLabel(image.imageUrl) }}
+            </p>
+            <button class="btn-delete" (click)="deleteImage(image.id)">Supprimer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION ÉVÉNEMENTS -->
+    <div class="dashboard-section">
+      <div class="section-header">
+        <h2>Gestion des Événements</h2>
+        <span class="count-badge">{{ evenements.length }} événement(s)</span>
+      </div>
+
+      <!-- Formulaire Événements -->
+      <form [formGroup]="evenementForm" (ngSubmit)="onEvenementSubmit()" class="dashboard-form">
+        <div class="form-group">
+          <label for="event-titre">Titre de l'événement *</label>
+          <input
+            id="event-titre"
+            type="text"
+            formControlName="titre"
+            class="form-input"
+            placeholder="Ex: Grand Opening"
+          />
+          <span class="error-message" *ngIf="evenementForm.get('titre')?.invalid && evenementSubmitted">
+            Le titre est requis (min 3 caractères)
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="event-description">Description *</label>
+          <textarea
+            id="event-description"
+            formControlName="description"
+            class="form-textarea"
+            placeholder="Décrivez l'événement..."
+            rows="3"
+          ></textarea>
+          <span class="error-message" *ngIf="evenementForm.get('description')?.invalid && evenementSubmitted">
+            La description est requise
+          </span>
+        </div>
+
+        <div class="form-row event-meta-row">
+          <div class="form-group">
+            <label for="event-date">Date de l'événement *</label>
+            <input
+              id="event-date"
+              type="date"
+              formControlName="date"
+              class="form-input"
+            />
+            <span class="error-message" *ngIf="evenementForm.get('date')?.invalid && evenementSubmitted">
+              La date est requise
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="event-lieu">Lieu *</label>
+            <input
+              id="event-lieu"
+              type="text"
+              formControlName="lieu"
+              class="form-input"
+              placeholder="Ex: Grenoble"
+            />
+            <span class="error-message" *ngIf="evenementForm.get('lieu')?.invalid && evenementSubmitted">
+              Le lieu est requis
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="event-image">Image de l'événement (optionnel)</label>
+          <div class="file-upload-control">
+            <input
+              id="event-image"
+              type="file"
+              accept="image/*"
+              class="file-input-hidden"
+              (change)="onEvenementFileSelected($event)"
+            />
+            <label for="event-image" class="file-upload-button">📁 Choisir une image</label>
+          </div>
+          <small class="helper-text" *ngIf="selectedEvenementFileName">
+            Fichier sélectionné : {{ selectedEvenementFileName }}
+          </small>
+          <div class="image-preview" *ngIf="evenementImagePreview">
+            <img [src]="evenementImagePreview" alt="Aperçu image événement" />
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit">+ Ajouter l'événement</button>
+      </form>
+
+      <!-- Liste des événements -->
+      <div class="items-list" *ngIf="evenements.length > 0">
+        <h3>Événements créés</h3>
+        <div class="items-grid">
+          <div class="item-card event-card" *ngFor="let event of evenements">
+            <div class="item-header">
+              <h4>{{ event.titre }}</h4>
+              <span class="date-badge">{{ event.date | date: 'dd/MM/yyyy' }}</span>
+            </div>
+            <p class="item-description">{{ event.description }}</p>
+            <p class="item-location">📍 {{ event.lieu }}</p>
+            <button class="btn-delete" (click)="deleteEvenement(event.id)">Supprimer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

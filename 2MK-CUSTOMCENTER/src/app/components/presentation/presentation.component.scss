@@ -1,0 +1,117 @@
+// Charte graphique 2MK
+$bleu-nuit: #1A3C63;
+$beige-clair: #F4E1C1;
+$orange-peche: #F8B784;
+$blanc-casse: #FCF9F5;
+$gris-texte: #555;
+$gris-clair: #f0f0f0;
+
+.presentation-container {
+  background-color: $blanc-casse;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
+
+  h2 {
+    font-family: 'Lobster', cursive;
+    font-size: 2rem;
+    font-weight: 400;
+    color: $bleu-nuit;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.5px;
+  }
+
+  .description {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    color: $gris-texte;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+
+  .services {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+
+    .service-item {
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(26, 60, 99, 0.08), 0 8px 20px rgba(26, 60, 99, 0.12), 0 15px 35px rgba(26, 60, 99, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 4px 12px rgba(26, 60, 99, 0.12), 0 12px 28px rgba(26, 60, 99, 0.18), 0 20px 45px rgba(26, 60, 99, 0.22);
+      }
+
+      h3 {
+        font-family: 'Lobster', cursive;
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: $bleu-nuit;
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.3px;
+      }
+
+      p {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 400;
+        color: $gris-texte;
+        line-height: 1.6;
+      }
+    }
+  }
+
+  .btn-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn-prestations {
+    background: linear-gradient(135deg, $bleu-nuit 0%, #2a5a8a 100%);
+    color: $beige-clair;
+    text-decoration: none;
+    padding: 0.75rem 1.8rem;
+    border-radius: 6px;
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 8px rgba(26, 60, 99, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(26, 60, 99, 0.3);
+    }
+  }
+}
+
+/* Sur écran plus large, on met les services côte à côte */
+@media (min-width: 768px) {
+  .presentation-container {
+    .services {
+      flex-direction: row;
+      justify-content: center;
+      gap: 2rem;
+
+      .service-item {
+        flex: 1 1 40%;
+        max-width: 400px;
+      }
+    }
+  }
+}

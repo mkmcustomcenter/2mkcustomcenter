@@ -1,0 +1,54 @@
+<div class="page-container">
+  <div class="galerie-container">
+    <div class="header-section">
+    <h2>Galerie de 2MK Custom Center</h2>
+    <p class="description">Découvrez nos réalisations en covering et sellerie. Chaque projet est une preuve de notre expertise et de notre passion pour l'excellence.</p>
+  </div>
+
+  <div class="carousel-wrapper">
+    <div class="carousel">
+      <!-- Images du carrousel -->
+      <div class="carousel-images">
+        <div class="carousel-track" [style.transform]="'translateX(-' + (currentIndex * 100) + '%)'">
+          <div class="carousel-slide" *ngFor="let image of images">
+            <img [src]="image.src" [alt]="image.alt" class="slide-image" />
+            <div class="slide-overlay">
+              <h3>{{ image.title }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boutons de navigation -->
+      <button class="carousel-btn carousel-btn-prev" (click)="prevSlide()" aria-label="Image précédente">
+        <span class="arrow">‹</span>
+      </button>
+      <button class="carousel-btn carousel-btn-next" (click)="nextSlide()" aria-label="Image suivante">
+        <span class="arrow">›</span>
+      </button>
+
+      <!-- Indicateurs (points) -->
+      <div class="carousel-indicators">
+        <button
+          *ngFor="let image of images; let i = index"
+          class="indicator"
+          [class.active]="i === currentIndex"
+          (click)="goToSlide(i)"
+          [attr.aria-label]="'Image ' + (i + 1)"
+        ></button>
+      </div>
+    </div>
+
+    <!-- Contrôle Autoplay -->
+    <button class="autoplay-toggle" (click)="toggleAutoplay()" [class.on]="isAutoplay">
+      <span class="play-icon">{{ isAutoplay ? '⏸' : '▶' }}</span>
+      {{ isAutoplay ? 'Pause' : 'Lecture' }}
+    </button>
+  </div>
+
+  <!-- Info de la diapo actuelle -->
+  <div class="carousel-info">
+    <p class="info-text">{{ currentIndex + 1 }} / {{ images.length }}</p>
+  </div>
+  </div>
+</div>
