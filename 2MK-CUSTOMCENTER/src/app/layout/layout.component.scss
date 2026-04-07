@@ -127,22 +127,24 @@
   }
 }
 
+.nav-backdrop {
+  display: none;
+}
+
 .nav-toggle:checked ~ .main-nav {
   display: flex;
 }
 
-.nav-toggle:checked + .nav-toggle-label {
-  pointer-events: none;
-}
-
 .main-content {
   display: flex;
-  flex-direction: row;
-  overflow-x: auto;
+  flex-direction: column;
+  overflow-x: hidden;
   overflow-y: auto;
   margin-top: 0;
   scroll-behavior: smooth;
   height: 100vh;
+  overscroll-behavior-x: none;
+  touch-action: pan-y pinch-zoom;
   transition: margin-top 0.92s cubic-bezier(0.22, 1, 0.36, 1), height 0.92s cubic-bezier(0.22, 1, 0.36, 1);
 
   /* Masquer la scrollbar */
@@ -154,9 +156,10 @@
   }
 
   section {
-    min-width: 100vw;
+    width: 100%;
+    min-width: 100%;
     padding: 0;
-    overflow-y: auto;
+    overflow-y: visible;
     flex-shrink: 0;
   }
 }
@@ -168,13 +171,35 @@
 }
 
 @media (max-width: 1023px) {
+  .main-content.intro-gate-active {
+    overflow: hidden;
+
+    section {
+      display: none;
+    }
+
+    section#intro {
+      display: block;
+      width: 100%;
+      min-height: 100vh;
+    }
+  }
+
   .main-header {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 1fr auto;
     padding: 0.5rem 1rem;
   }
 
+  .nav-toggle-label {
+    grid-column: 3;
+    justify-self: end;
+  }
+
   .logo-header {
-    justify-content: flex-start;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center;
     .logo {
       width: 148px;
     }
@@ -184,10 +209,39 @@
     padding: 0.85rem 1rem;
     font-size: 0.95rem;
   }
+
+  .nav-backdrop {
+    border: 0;
+    padding: 0;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: 998;
+    cursor: default;
+  }
+
+  .nav-toggle:checked ~ .nav-backdrop {
+    display: block;
+  }
 }
 
 /* Desktop */
 @media (min-width: 1024px) {
+  .main-content {
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: auto;
+    touch-action: pan-x pan-y pinch-zoom;
+
+    section {
+      min-width: 100vw;
+      overflow-y: auto;
+    }
+  }
+
   .main-header {
     grid-template-columns: auto 1fr auto;
     padding: 0.5rem 2rem;

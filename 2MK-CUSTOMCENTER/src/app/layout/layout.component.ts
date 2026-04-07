@@ -43,6 +43,13 @@ export class LayoutComponent {
     }
   }
 
+  closeMobileMenu(): void {
+    const navToggleElement = document.getElementById('nav-toggle') as HTMLInputElement | null;
+    if (navToggleElement) {
+      navToggleElement.checked = false;
+    }
+  }
+
   @HostListener('wheel', ['$event'])
   onMouseWheel(event: WheelEvent): void {
     if (event.deltaX !== 0) {
