@@ -12,18 +12,20 @@
     </label>
 
     <nav class="main-nav">
-      <a (click)="scrollToSection('intro')">Accueil</a>
+      <a (click)="scrollToSection('intro'); closeMobileMenu()">Accueil</a>
       <!-- <a (click)="scrollToSection('presentation')">Présentation</a> -->
-      <a (click)="scrollToSection('prestations')">Prestations</a>
+      <a (click)="scrollToSection('prestations'); closeMobileMenu()">Prestations</a>
       <!-- <a (click)="scrollToSection('galerie')">Galerie</a> -->
-      <a (click)="scrollToSection('contact')" class="contact-link">Contact</a>
+      <a (click)="scrollToSection('contact'); closeMobileMenu()" class="contact-link">Contact</a>
       <!-- <a (click)="scrollToSection('reservation')">Réservation</a> -->
       <!-- <a (click)="scrollToSection('evenements')">Événements</a> -->
-      <a (click)="scrollToSection('mentions')">Mentions</a>
+      <a (click)="scrollToSection('mentions'); closeMobileMenu()">Mentions</a>
     </nav>
+
+    <button type="button" class="nav-backdrop" aria-label="Fermer le menu" (click)="closeMobileMenu()"></button>
   </header>
 
-  <main class="main-content" #mainContent>
+  <main class="main-content" #mainContent [class.intro-gate-active]="!isHeaderVisible()" (click)="closeMobileMenu()">
     <section id="intro">
       <app-intro></app-intro>
     </section>
