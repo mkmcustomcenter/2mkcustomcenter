@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { environment } from '../../../environments/environment';
+import { environment } from './dashboard.environment';
 import { PasswordResetService } from '../../services/password-reset.service';
 import emailjs from '@emailjs/browser';
 
@@ -20,6 +20,10 @@ export class DashboardComponent implements OnInit {
   
   galerieImages: any[] = [];
   evenements: any[] = [];
+  selectedGalerieFileName = '';
+  galerieImagePreview = '';
+  selectedEvenementFileName = '';
+  evenementImagePreview = '';
   
   galerieSubmitted = false;
   evenementSubmitted = false;
@@ -42,6 +46,18 @@ export class DashboardComponent implements OnInit {
     private fb: FormBuilder,
     private resetService: PasswordResetService
   ) {}
+
+  private safeParse<T>(raw: string | null, fallback: T): T {
+    if (!raw) {
+      return fallback;
+    }
+
+    try {
+      return JSON.parse(raw) as T;
+    } catch {
+      return fallback;
+    }
+  }
 
   ngOnInit(): void {
     this.initLoginForm();
@@ -80,9 +96,9 @@ export class DashboardComponent implements OnInit {
   checkAuthentication(): void {
     const session = localStorage.getItem('dashboardSession');
     if (session) {
-      const parsedSession = JSON.parse(session);
+      const parsedSession = this.safeParse<{ timestamp?: number }>(session, {});
       const now = new Date().getTime();
-      if (now - parsedSession.timestamp < 3600000) {
+      if (parsedSession.timestamp && now - parsedSession.timestamp < 3600000) {
         this.isAuthenticated = true;
       } else {
         localStorage.removeItem('dashboardSession');
@@ -91,9 +107,9 @@ export class DashboardComponent implements OnInit {
 
     const lockStatus = localStorage.getItem('dashboardLock');
     if (lockStatus) {
-      const parsedLock = JSON.parse(lockStatus);
+      const parsedLock = this.safeParse<{ timestamp?: number }>(lockStatus, {});
       const now = new Date().getTime();
-      if (now - parsedLock.timestamp < this.lockTime) {
+      if (parsedLock.timestamp && now - parsedLock.timestamp < this.lockTime) {
         this.isLocked = true;
       } else {
         localStorage.removeItem('dashboardLock');
@@ -284,9 +300,49 @@ export class DashboardComponent implements OnInit {
     this.galerieForm = this.fb.group({
       titre: ['', [Validators.required, Validators.minLength(3)]],
       description: ['', Validators.required],
-      imageUrl: ['', Validators.required],
+      imageUrl: [''],
       categorie: ['', Validators.required]
     });
+  }
+
+  onGalerieFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+
+    if (!file) {
+      this.selectedGalerieFileName = '';
+      this.galerieImagePreview = '';
+      return;
+    }
+
+    if (!file.type.startsWith('image/')) {
+      alert('Veuillez sélectionner un fichier image valide.');
+      input.value = '';
+      this.selectedGalerieFileName = '';
+      this.galerieImagePreview = '';
+      return;
+    }
+
+    const maxSizeInBytes = 3 * 1024 * 1024;
+    if (file.size > maxSizeInBytes) {
+      alert('Image trop lourde (max 3MB).');
+      input.value = '';
+      this.selectedGalerieFileName = '';
+      this.galerieImagePreview = '';
+      return;
+    }
+
+    this.selectedGalerieFileName = file.name;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = String(reader.result ?? '');
+      this.galerieImagePreview = dataUrl;
+      this.galerieForm.patchValue({ imageUrl: dataUrl });
+      this.galerieForm.get('imageUrl')?.markAsTouched();
+      this.galerieForm.get('imageUrl')?.updateValueAndValidity();
+    };
+    reader.readAsDataURL(file);
   }
 
   initEvenementForm(): void {
@@ -301,14 +357,69 @@ export class DashboardComponent implements OnInit {
 
   onGalerieSubmit(): void {
     this.galerieSubmitted = true;
+
+    const imageUrlValue = this.galerieForm.get('imageUrl')?.value;
+    if (!imageUrlValue || String(imageUrlValue).trim().length === 0) {
+      this.galerieForm.get('imageUrl')?.setErrors({ required: true });
+      return;
+    }
+
     if (this.galerieForm.valid) {
       const newImage = this.galerieForm.value;
       this.galerieImages.push({ ...newImage, id: Date.now() });
-      this.saveGalerie();
+      const saved = this.saveGalerie();
+      if (!saved) {
+        this.galerieImages.pop();
+        alert('Impossible de sauvegarder l\'image (stockage local saturé ou indisponible).');
+        return;
+      }
       this.galerieForm.reset();
+      this.selectedGalerieFileName = '';
+      this.galerieImagePreview = '';
       this.galerieSubmitted = false;
       alert('Image ajoutée avec succès!');
     }
+  }
+
+  onEvenementFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+
+    if (!file) {
+      this.selectedEvenementFileName = '';
+      this.evenementImagePreview = '';
+      this.evenementForm.patchValue({ imageUrl: '' });
+      return;
+    }
+
+    if (!file.type.startsWith('image/')) {
+      alert('Veuillez sélectionner un fichier image valide.');
+      input.value = '';
+      this.selectedEvenementFileName = '';
+      this.evenementImagePreview = '';
+      this.evenementForm.patchValue({ imageUrl: '' });
+      return;
+    }
+
+    const maxSizeInBytes = 3 * 1024 * 1024;
+    if (file.size > maxSizeInBytes) {
+      alert('Image trop lourde (max 3MB).');
+      input.value = '';
+      this.selectedEvenementFileName = '';
+      this.evenementImagePreview = '';
+      this.evenementForm.patchValue({ imageUrl: '' });
+      return;
+    }
+
+    this.selectedEvenementFileName = file.name;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = String(reader.result ?? '');
+      this.evenementImagePreview = dataUrl;
+      this.evenementForm.patchValue({ imageUrl: dataUrl });
+    };
+    reader.readAsDataURL(file);
   }
 
   onEvenementSubmit(): void {
@@ -316,38 +427,83 @@ export class DashboardComponent implements OnInit {
     if (this.evenementForm.valid) {
       const newEvent = this.evenementForm.value;
       this.evenements.push({ ...newEvent, id: Date.now() });
-      this.saveEvenements();
+      const saved = this.saveEvenements();
+      if (!saved) {
+        this.evenements.pop();
+        alert('Impossible de sauvegarder l\'événement (stockage local saturé ou indisponible).');
+        return;
+      }
       this.evenementForm.reset();
+      this.selectedEvenementFileName = '';
+      this.evenementImagePreview = '';
       this.evenementSubmitted = false;
       alert('Événement ajouté avec succès!');
     }
   }
 
   deleteImage(id: number): void {
+    const previous = [...this.galerieImages];
     this.galerieImages = this.galerieImages.filter(img => img.id !== id);
-    this.saveGalerie();
+    const saved = this.saveGalerie();
+    if (!saved) {
+      this.galerieImages = previous;
+      alert('Suppression impossible: erreur de sauvegarde locale.');
+    }
   }
 
   deleteEvenement(id: number): void {
+    const previous = [...this.evenements];
     this.evenements = this.evenements.filter(evt => evt.id !== id);
-    this.saveEvenements();
+    const saved = this.saveEvenements();
+    if (!saved) {
+      this.evenements = previous;
+      alert('Suppression impossible: erreur de sauvegarde locale.');
+    }
   }
 
-  saveGalerie(): void {
-    localStorage.setItem('galerieImages', JSON.stringify(this.galerieImages));
+  saveGalerie(): boolean {
+    try {
+      localStorage.setItem('galerieImages', JSON.stringify(this.galerieImages));
+      return true;
+    } catch (error) {
+      console.error('Erreur de sauvegarde galerie:', error);
+      return false;
+    }
   }
 
   loadGalerie(): void {
-    const data = localStorage.getItem('galerieImages');
-    this.galerieImages = data ? JSON.parse(data) : [];
+    const parsed = this.safeParse<unknown>(localStorage.getItem('galerieImages'), []);
+    this.galerieImages = Array.isArray(parsed) ? parsed as any[] : [];
   }
 
-  saveEvenements(): void {
-    localStorage.setItem('evenements', JSON.stringify(this.evenements));
+  saveEvenements(): boolean {
+    try {
+      localStorage.setItem('evenements', JSON.stringify(this.evenements));
+      return true;
+    } catch (error) {
+      console.error('Erreur de sauvegarde événements:', error);
+      return false;
+    }
   }
 
   loadEvenements(): void {
-    const data = localStorage.getItem('evenements');
-    this.evenements = data ? JSON.parse(data) : [];
+    const parsed = this.safeParse<unknown>(localStorage.getItem('evenements'), []);
+    this.evenements = Array.isArray(parsed) ? parsed as any[] : [];
+  }
+
+  isDataImageUrl(url: string): boolean {
+    return typeof url === 'string' && url.startsWith('data:image/');
+  }
+
+  getImageSourceLabel(url: string): string {
+    if (!url) {
+      return 'Source image indisponible';
+    }
+
+    if (this.isDataImageUrl(url)) {
+      return '🖼️ Image importée depuis votre ordinateur';
+    }
+
+    return `🔗 ${url}`;
   }
 }

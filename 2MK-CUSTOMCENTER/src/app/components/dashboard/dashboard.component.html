@@ -200,27 +200,40 @@
 
         <div class="form-row">
           <div class="form-group">
-            <label for="galerie-url">URL de l'image *</label>
-            <input
-              id="galerie-url"
-              type="text"
-              formControlName="imageUrl"
-              class="form-input"
-              placeholder="assets/images/..."
-            />
+            <label for="galerie-file">Image depuis votre ordinateur *</label>
+            <div class="file-upload-control">
+              <input
+                id="galerie-file"
+                type="file"
+                accept="image/*"
+                class="file-input-hidden"
+                (change)="onGalerieFileSelected($event)"
+              />
+              <label for="galerie-file" class="file-upload-button">📁 Choisir une image</label>
+            </div>
+            <small class="helper-text" *ngIf="selectedGalerieFileName">
+              Fichier sélectionné : {{ selectedGalerieFileName }}
+            </small>
+            <div class="image-preview" *ngIf="galerieImagePreview">
+              <img [src]="galerieImagePreview" alt="Aperçu image galerie" />
+            </div>
             <span class="error-message" *ngIf="galerieForm.get('imageUrl')?.invalid && galerieSubmitted">
-              L'URL est requise
+              Veuillez sélectionner une image
             </span>
           </div>
+        </div>
 
+        <div class="form-row category-row">
           <div class="form-group">
             <label for="galerie-categorie">Catégorie *</label>
-            <select id="galerie-categorie" formControlName="categorie" class="form-select">
-              <option value="">Sélectionnez une catégorie</option>
-              <option value="covering">Covering</option>
-              <option value="sellerie">Sellerie</option>
-              <option value="portfolio">Portfolio</option>
-            </select>
+            <div class="custom-select-control">
+              <select id="galerie-categorie" formControlName="categorie" class="form-select custom-select">
+                <option value="">Sélectionnez une catégorie</option>
+                <option value="covering">Covering</option>
+                <option value="sellerie">Sellerie</option>
+                <option value="portfolio">Portfolio</option>
+              </select>
+            </div>
             <span class="error-message" *ngIf="galerieForm.get('categorie')?.invalid && galerieSubmitted">
               La catégorie est requise
             </span>
@@ -240,7 +253,12 @@
               <span class="category-badge">{{ image.categorie }}</span>
             </div>
             <p class="item-description">{{ image.description }}</p>
-            <p class="item-url">{{ image.imageUrl }}</p>
+            <div class="item-image" *ngIf="image.imageUrl">
+              <img [src]="image.imageUrl" [alt]="image.titre" />
+            </div>
+            <p class="item-url" [class.item-url-local]="isDataImageUrl(image.imageUrl)">
+              {{ getImageSourceLabel(image.imageUrl) }}
+            </p>
             <button class="btn-delete" (click)="deleteImage(image.id)">Supprimer</button>
           </div>
         </div>
@@ -284,7 +302,7 @@
           </span>
         </div>
 
-        <div class="form-row">
+        <div class="form-row event-meta-row">
           <div class="form-group">
             <label for="event-date">Date de l'événement *</label>
             <input
@@ -315,13 +333,22 @@
 
         <div class="form-group">
           <label for="event-image">Image de l'événement (optionnel)</label>
-          <input
-            id="event-image"
-            type="text"
-            formControlName="imageUrl"
-            class="form-input"
-            placeholder="assets/images/event.jpg"
-          />
+          <div class="file-upload-control">
+            <input
+              id="event-image"
+              type="file"
+              accept="image/*"
+              class="file-input-hidden"
+              (change)="onEvenementFileSelected($event)"
+            />
+            <label for="event-image" class="file-upload-button">📁 Choisir une image</label>
+          </div>
+          <small class="helper-text" *ngIf="selectedEvenementFileName">
+            Fichier sélectionné : {{ selectedEvenementFileName }}
+          </small>
+          <div class="image-preview" *ngIf="evenementImagePreview">
+            <img [src]="evenementImagePreview" alt="Aperçu image événement" />
+          </div>
         </div>
 
         <button type="submit" class="btn-submit">+ Ajouter l'événement</button>

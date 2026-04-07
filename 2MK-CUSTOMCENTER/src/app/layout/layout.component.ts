@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, ViewChild, ElementRef, HostListener, Signal } from '@angular/core';
 
 import { IntroComponent } from '../components/intro/intro.component';
-import { PresentationComponent } from '../components/presentation/presentation.component';
+// import { PresentationComponent } from '../components/presentation/presentation.component';
 import { PrestationComponent } from '../components/prestation/prestation.component';
 import { GalerieComponent } from '../components/galerie/galerie.component';
-import { ReservationComponent } from '../components/reservation/reservation.component';
+// import { ReservationComponent } from '../components/reservation/reservation.component';
 import { EvenementsComponent } from '../components/evenements/evenements.component';
 import { ContactComponent } from '../components/contact/contact.component';
 import { MentionsComponent } from '../components/mentions/mentions.component';
@@ -17,11 +17,11 @@ import { HeaderService } from '../services/header.service';
   imports: [
     CommonModule,
     IntroComponent,
-    PresentationComponent,
+    // PresentationComponent,
     PrestationComponent,
-    GalerieComponent,
-    ReservationComponent,
-    EvenementsComponent,
+    // GalerieComponent,
+    // ReservationComponent,
+    // EvenementsComponent,
     ContactComponent,
     MentionsComponent
   ],

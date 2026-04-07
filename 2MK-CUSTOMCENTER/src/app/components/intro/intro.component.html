@@ -1,9 +1,30 @@
 
-<div class="intro-container">
+<div class="intro-container" [class.after-click]="logoMoved">
   <div class="logo-wrapper" role="button" tabindex="0" aria-label="Logo 2MK Custom Center">
-    <img src="../../../assets/pp.png" alt="Logo 2MK Custom Center" class="logo" width="300" height="150" />
+    <img src="/assets/pp.png" alt="Logo 2MK Custom Center" class="logo" width="300" height="150" />
   </div>
-  <p class="subtitle">Votre spécialiste du covering et sellerie sur mesure à Grenoble</p>
+  <p class="subtitle" *ngIf="!logoMoved">Votre spécialiste du covering et sellerie sur mesure à Grenoble</p>
+  <div class="intro-content" *ngIf="logoMoved">
+    <div class="intro-text-block subtitle-after">
+      <h2 class="welcome-title">Bienvenue chez 2MK Custom Center</h2>
+      <p class="subtitle">
+        2MK Custom Center est une entreprise de personnalisation esthétique automobile<br>
+        Située dans la périphérie de Grenoble nous serons ravies de vous accueillir afin de<br>
+        réaliser vos envies grâce à notre savoir-faire et notre expertise
+      </p>
+      <div class="intro-social-links" aria-label="Réseaux sociaux 2MK Custom Center">
+        <a href="https://www.facebook.com/2mkcustomcenter" target="_blank" rel="noopener noreferrer" aria-label="Facebook 2MK Custom Center">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/2mkcustomcenter/" target="_blank" rel="noopener noreferrer" aria-label="Instagram 2MK Custom Center">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+    <div class="intro-image-wrapper subtitle-after">
+      <img src="/assets/2mk_CEO.jpeg" alt="2MK CEO" class="intro-image" />
+    </div>
+  </div>
 
   <button class="btn-enter" *ngIf="!logoMoved" (click)="onEnterClick()">
     Entrer sur le site

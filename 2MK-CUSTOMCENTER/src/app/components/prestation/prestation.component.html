@@ -1,5 +1,6 @@
-<div class="prestation-container">
-  <div class="header-section">
+<div class="page-container">
+  <div class="prestation-container">
+    <div class="header-section">
     <h2>Prestations de 2MK Custom Center</h2>
     <p class="description">
       Bienvenue chez 2MK Custom Center, votre spécialiste du covering et de la sellerie sur mesure à Grenoble. Nous transformons votre véhicule selon vos envies avec des matériaux de qualité.
@@ -31,10 +32,10 @@
         </ul>
       </div>
 
-      <div class="tarifs">
+      <!-- <div class="tarifs">
         <h4>Tarifs</h4>
-        <p>À partir de 200€ TTC (partiel)<br>À partir de 1000€ TTC (complet)</p>
-      </div>
+        <p>À partir de <strong>200€ TTC</strong> (partiel)<br>À partir de <strong>1000€ TTC</strong> (complet)</p>
+      </div> -->
 
       <button class="btn-service" (click)="goToCovering()">Voir plus</button>
     </div>
@@ -55,21 +56,189 @@
       <div class="services-list">
         <h4>Services</h4>
         <ul>
-          <li>Restauration et réparation → 190€ TTC + prix du textile</li>
-          <li>Taillage de mousse → 110€ TTC</li>
+          <li>Restauration et réparation</li>
+          <li>Taillage de mousse</li>
           <li>Sellerie Moto (Pack Confort, Design, ou Supérieur)</li>
           <li>Sellerie Voiture (Réparations, Création, Restauration)</li>
           <li>Restauration totale sur devis</li>
         </ul>
       </div>
 
-      <div class="tarifs">
+      <!-- <div class="tarifs">
         <h4>Tarifs</h4>
-        <p>À partir de 190€ TTC<br>À partir de 550€ TTC (création siège avant)<br>À partir de 1000€ TTC (banquette)</p>
-      </div>
+        <p>À partir de <strong>190€ TTC</strong><br>À partir de <strong>550€ TTC</strong> (création siège avant)<br>À partir de <strong>1000€ TTC</strong> (banquette)</p>
+      </div> -->
 
       <button class="btn-service" (click)="goToSellerie()">Voir plus</button>
     </div>
   </div>
 
+  <div class="details-section">
+    <div class="details-header">
+      <h3>Programmes & tarifs détaillés</h3>
+      <p>
+        Découvrez en détail nos prestations de covering, protection, sellerie et personnalisation.
+      </p>
+    </div>
+
+    <div class="detail-card" id="detail-covering">
+      <div class="detail-card-header">
+        <h4>Covering</h4>
+      </div>
+      <div class="detail-card-content">
+        <p>
+          Le covering consiste à appliquer un film adhésif spécifique sur la carrosserie.
+          Initialement utilisé par les professionnels à la recherche d’une solution plus rapide et moins coûteuse
+          pour transformer ou promouvoir leurs véhicules, il s’est aujourd’hui ouvert au grand public.
+        </p>
+
+        <div class="detail-columns">
+          <div class="detail-block">
+            <h5>Ses avantages</h5>
+            <ul>
+              <li>Personnalisation totale avec une finition proche d’une peinture.</li>
+              <li>Large choix de textures : mat, brillant, satiné, carbone et plus encore.</li>
+              <li>Solution réversible, avec retour à l’origine sans abîmer la peinture.</li>
+              <li>Protection légère contre les micro-rayures, UV et petites agressions du quotidien.</li>
+              <li>Pose plus rapide qu’une peinture complète.</li>
+              <li>Coût maîtrisé par rapport à une remise en peinture.</li>
+              <li>Valorisation du véhicule pour le leasing, la revente ou l’image professionnelle.</li>
+            </ul>
+          </div>
+
+          <div class="detail-block tarifs-block">
+            <h5>Tarifs</h5>
+            <ul>
+              <li>Partiel : à partir de <strong>200€ TTC</strong> (ex : rétroviseur)</li>
+              <li>Total : à partir de <strong>1000€ TTC</strong> (ex : petite citadine)</li>
+              <li>Marquage publicitaire : sur devis</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-card">
+      <div class="detail-card-header">
+        <h4>PPF</h4>
+        <span class="detail-subtitle">Paint Protection Film</span>
+      </div>
+      <div class="detail-card-content">
+        <p>
+          Le PPF est un film transparent de protection carrosserie. Contrairement au covering,
+          qui répond surtout à un objectif esthétique, le PPF est conçu avant tout pour protéger la peinture.
+          D’abord utilisé dans l’aéronautique militaire pour protéger les pales d’hélicoptères,
+          il est désormais accessible au grand public.
+        </p>
+
+        <div class="detail-columns">
+          <div class="detail-block">
+            <h5>Ses avantages</h5>
+            <ul>
+              <li>Protection contre les rayures, gravillons et petits impacts.</li>
+              <li>Effet auto-cicatrisant sur certains films avec la chaleur.</li>
+              <li>Protection contre les UV pour limiter le ternissement de la peinture.</li>
+              <li>Film totalement discret qui conserve la couleur d’origine.</li>
+              <li>Retrait possible sans abîmer la peinture.</li>
+            </ul>
+          </div>
+
+          <div class="detail-block tarifs-block">
+            <h5>Tarifs</h5>
+            <ul>
+              <li>Partiel : à partir de <strong>700€ TTC</strong> (par choc avant)</li>
+              <li>Total : à partir de <strong>4000€ TTC</strong> (citadine)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-card" id="detail-sellerie-auto-bateau-medical">
+      <div class="detail-card-header">
+        <h4>Sellerie auto / bateau / médical</h4>
+      </div>
+      <div class="detail-card-content">
+        <p>
+          Technique issue du métier de sellier-harnacheur, historiquement dédié aux selles et équipements équestres,
+          la sellerie a évolué avec l’arrivée de l’automobile puis de nouveaux usages spécialisés.
+        </p>
+
+        <div class="detail-columns three-columns">
+          <div class="detail-block">
+            <h5>La réparation</h5>
+            <p>Permet de remettre à l’origine une pièce de sellerie et/ou la mousse de votre siège.</p>
+          </div>
+
+          <div class="detail-block">
+            <h5>La confection</h5>
+            <p>Fabrication sur mesure selon vos envies, vos contraintes et le style recherché.</p>
+          </div>
+
+          <div class="detail-block">
+            <h5>La restauration</h5>
+            <p>Restauration complète de l’intérieur de votre véhicule à l’origine ou selon votre projet.</p>
+          </div>
+        </div>
+
+        <div class="detail-block tarifs-block full-width">
+          <h5>Tarifs</h5>
+          <ul>
+            <li>Réparation : <strong>190€ TTC</strong> + prix du textile</li>
+            <li>Réparation mousse : <strong>150€ TTC</strong></li>
+            <li>Confection : sur devis</li>
+            <li>Restauration : sur devis</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-card">
+      <div class="detail-card-header">
+        <h4>Sellerie moto</h4>
+      </div>
+      <div class="detail-card-content">
+        <div class="detail-columns three-columns">
+          <div class="detail-block tarifs-block">
+            <h5>Packs</h5>
+            <ul>
+              <li>Pack confort : insert mousse confort <strong>150€ TTC</strong></li>
+              <li>Pack design : housse de selle sur mesure <strong>250€ TTC</strong> (hors option)</li>
+              <li>Pack supérieur : insert confort + housse sur mesure <strong>350€ TTC</strong> (hors option)</li>
+            </ul>
+          </div>
+
+          <div class="detail-block tarifs-block">
+            <h5>Options</h5>
+            <ul>
+              <li>Passe-poil : <strong>30€ TTC</strong></li>
+              <li>Design diamant : <strong>50€ TTC</strong></li>
+              <li>Design hexagone : <strong>50€ TTC</strong></li>
+              <li>Broderie : <strong>50€ TTC</strong></li>
+            </ul>
+          </div>
+
+          <div class="detail-block note-block">
+            <h5>Informations</h5>
+            <p>Tarif indiqué pour une selle standard 1 place.</p>
+            <p>
+              Tous nos textiles possèdent la norme non-feu M1, classification française issue de la norme NF P 92-507,
+              évaluant la réaction au feu des matériaux textiles.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button
+    class="back-to-top"
+    type="button"
+    (click)="scrollToTop()"
+    [class.visible]="showBackToTop"
+    [attr.aria-hidden]="!showBackToTop"
+    aria-label="Revenir en haut de la page"
+  >
+    ↑
+  </button>
 </div>

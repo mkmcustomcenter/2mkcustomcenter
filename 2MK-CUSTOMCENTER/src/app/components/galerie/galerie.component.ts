@@ -8,6 +8,14 @@ interface CarouselImage {
   title: string;
 }
 
+interface DashboardGalleryImage {
+  id: number;
+  titre: string;
+  description: string;
+  imageUrl: string;
+  categorie: string;
+}
+
 @Component({
   selector: 'app-galerie',
   standalone: true,
@@ -17,7 +25,7 @@ interface CarouselImage {
 })
 export class GalerieComponent implements OnInit, OnDestroy {
   currentIndex = 0;
-  autoplayInterval: any;
+  autoplayInterval: ReturnType<typeof setInterval> | null = null;
   isAutoplay = true;
   autoplayDuration = 5000; // 5 secondes
 
@@ -27,34 +35,11 @@ export class GalerieComponent implements OnInit, OnDestroy {
       src: 'assets/ban_2mk.png',
       alt: 'Banner 2MK Custom Center',
       title: 'Bienvenue chez 2MK'
-    },
-    {
-      id: 2,
-      src: 'assets/voiture.png',
-      alt: 'Voiture personnalisée',
-      title: 'Nos Réalisations'
-    },
-    {
-      id: 3,
-      src: 'assets/pp_optimized.png',
-      alt: 'Portfolio professionnel',
-      title: 'Portfolio'
-    },
-    {
-      id: 4,
-      src: 'assets/rendu.svg',
-      alt: 'Rendu covering',
-      title: 'Covering et Design'
-    },
-    {
-      id: 5,
-      src: 'assets/wip_2mk.png',
-      alt: 'Work in progress',
-      title: 'Nos Projets'
     }
   ];
 
   ngOnInit(): void {
+    this.loadDashboardImages();
     this.startAutoplay();
   }
 
@@ -63,22 +48,37 @@ export class GalerieComponent implements OnInit, OnDestroy {
   }
 
   nextSlide(): void {
+    if (this.images.length === 0) {
+      return;
+    }
+
     this.currentIndex = (this.currentIndex + 1) % this.images.length;
     this.resetAutoplay();
   }
 
   prevSlide(): void {
+    if (this.images.length === 0) {
+      return;
+    }
+
     this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
     this.resetAutoplay();
   }
 
   goToSlide(index: number): void {
+    if (this.images.length === 0) {
+      return;
+    }
+
     this.currentIndex = index;
     this.resetAutoplay();
   }
 
   startAutoplay(): void {
-    if (!this.isAutoplay) return;
+    if (!this.isAutoplay || this.images.length <= 1) {
+      return;
+    }
+
     this.autoplayInterval = setInterval(() => {
       this.currentIndex = (this.currentIndex + 1) % this.images.length;
     }, this.autoplayDuration);
@@ -87,6 +87,7 @@ export class GalerieComponent implements OnInit, OnDestroy {
   stopAutoplay(): void {
     if (this.autoplayInterval) {
       clearInterval(this.autoplayInterval);
+      this.autoplayInterval = null;
     }
   }
 
@@ -102,5 +103,54 @@ export class GalerieComponent implements OnInit, OnDestroy {
     } else {
       this.stopAutoplay();
     }
+  }
+
+  private loadDashboardImages(): void {
+    const rawData = localStorage.getItem('galerieImages');
+    if (!rawData) {
+      return;
+    }
+
+    try {
+      const parsedData = JSON.parse(rawData) as DashboardGalleryImage[];
+      if (!Array.isArray(parsedData) || parsedData.length === 0) {
+        return;
+      }
+
+      const dynamicImages: CarouselImage[] = parsedData
+        .filter((image) => !!image?.imageUrl)
+        .map((image) => ({
+          id: image.id,
+          src: this.normalizeImageUrl(image.imageUrl),
+          alt: image.titre || 'Image galerie 2MK',
+          title: image.titre || 'Réalisation 2MK'
+        }));
+
+      if (dynamicImages.length > 0) {
+        this.images = [...dynamicImages, ...this.images];
+      }
+    } catch (error) {
+      console.error('Erreur de lecture des images dashboard:', error);
+    }
+  }
+
+  private normalizeImageUrl(url: string): string {
+    if (!url) {
+      return '';
+    }
+
+    if (url.startsWith('data:image/')) {
+      return url;
+    }
+
+    if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('/assets/')) {
+      return url;
+    }
+
+    if (url.startsWith('assets/')) {
+      return `/${url}`;
+    }
+
+    return url;
   }
 }

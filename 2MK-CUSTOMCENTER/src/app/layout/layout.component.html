@@ -1,7 +1,7 @@
 <div class="layout-container">
   <header class="main-header" [class.visible]="isHeaderVisible()">
     <div class="logo-header">
-      <img src="../../assets/pp.png" alt="Logo 2MK Custom Center" class="logo" width="160" height="80" />
+      <img src="/assets/pp.png" alt="Logo 2MK Custom Center" class="logo" width="160" height="80" />
     </div>
 
     <input type="checkbox" id="nav-toggle" class="nav-toggle" />
@@ -15,10 +15,10 @@
       <a (click)="scrollToSection('intro')">Accueil</a>
       <!-- <a (click)="scrollToSection('presentation')">Présentation</a> -->
       <a (click)="scrollToSection('prestations')">Prestations</a>
-      <a (click)="scrollToSection('galerie')">Galerie</a>
-      <a (click)="scrollToSection('contact')">Contact</a>
+      <!-- <a (click)="scrollToSection('galerie')">Galerie</a> -->
+      <a (click)="scrollToSection('contact')" class="contact-link">Contact</a>
       <!-- <a (click)="scrollToSection('reservation')">Réservation</a> -->
-      <a (click)="scrollToSection('evenements')">Événements</a>
+      <!-- <a (click)="scrollToSection('evenements')">Événements</a> -->
       <a (click)="scrollToSection('mentions')">Mentions</a>
     </nav>
   </header>
@@ -28,29 +28,29 @@
       <app-intro></app-intro>
     </section>
 
-    <section id="presentation">
+    <!-- <section id="presentation">
       <app-presentation></app-presentation>
-    </section>
+    </section> -->
 
     <section id="prestations">
       <app-prestation></app-prestation>
     </section>
 
+    <!-- <section id="galerie">
+      <app-galerie></app-galerie>
+    </section> -->
+
     <section id="contact">
       <app-contact></app-contact>
     </section>
 
-    <section id="galerie">
-      <app-galerie></app-galerie>
-    </section>
+    <!-- <section id="reservation">
+            <app-reservation></app-reservation>
+                </section>--> -->
 
-    <section id="reservation">
-      <app-reservation></app-reservation>
-    </section>
-
-    <section id="evenements">
+    <!-- <section id="evenements">
       <app-evenements></app-evenements>
-    </section>
+    </section> -->
 
     <section id="mentions">
       <app-mentions></app-mentions>

@@ -9,7 +9,6 @@ $coquille-oeuf: #F0EAD6;
 
 .prestation-container {
   background-color: $blanc-casse;
-  padding: 2rem 1.5rem;
   min-height: 100vh;
   font-family: 'Montserrat', sans-serif;
 
@@ -22,8 +21,9 @@ $coquille-oeuf: #F0EAD6;
       font-size: 2rem;
       font-weight: 400;
       color: $bleu-nuit;
-      margin-bottom: 1.5rem;
+      margin: 0 0 1.5rem 0;
       letter-spacing: -0.5px;
+      line-height: 1.2;
     }
 
     .description {
@@ -46,22 +46,30 @@ $coquille-oeuf: #F0EAD6;
 
     .service-item {
       background-color: white;
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(26, 60, 99, 0.08), 0 8px 20px rgba(26, 60, 99, 0.12), 0 15px 35px rgba(26, 60, 99, 0.15);
+      border: 1px solid rgba(26, 60, 99, 0.06);
+      box-shadow: 
+        0 1px 3px rgba(26, 60, 99, 0.04),
+        0 4px 12px rgba(26, 60, 99, 0.06),
+        0 12px 28px rgba(26, 60, 99, 0.08);
       display: flex;
       flex-direction: column;
       height: 100%;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s ease;
 
       &:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 4px 12px rgba(26, 60, 99, 0.12), 0 12px 28px rgba(26, 60, 99, 0.18), 0 20px 45px rgba(26, 60, 99, 0.22);
+        transform: translateY(-4px);
+        border-color: rgba(248, 183, 132, 0.18);
+        box-shadow: 
+          0 2px 6px rgba(26, 60, 99, 0.06),
+          0 8px 20px rgba(26, 60, 99, 0.08),
+          0 20px 44px rgba(26, 60, 99, 0.12);
       }
 
       .card-header {
-        background: linear-gradient(135deg, $bleu-nuit 0%, #2a5a8a 100%);
-        padding: 1.5rem;
+        background: linear-gradient(135deg, $bleu-nuit 0%, #2a5a8a 60%, #3a6fb0 100%);
+        padding: 1rem 1.5rem;
         color: $beige-clair;
 
         h3 {
@@ -108,7 +116,7 @@ $coquille-oeuf: #F0EAD6;
 
         h4 {
           font-family: 'Lobster', cursive;
-          font-size: 1rem;
+          font-size: 1.1rem;
           font-weight: 400;
           color: $bleu-nuit;
           margin: 0 0 1rem 0;
@@ -174,23 +182,28 @@ $coquille-oeuf: #F0EAD6;
 
       .btn-service {
         font-family: 'Montserrat', sans-serif;
-        background: linear-gradient(135deg, $bleu-nuit 0%, #2a5a8a 100%);
+        background: linear-gradient(135deg, $bleu-nuit 0%, #2a5a8a 60%, #3a6fb0 100%);
         color: white;
         border: none;
         padding: 1rem 2rem;
         margin: 1.5rem;
-        border-radius: 8px;
+        border-radius: 10px;
         font-weight: 700;
         font-size: 1rem;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         text-transform: uppercase;
-        letter-spacing: 0.5px;
-        box-shadow: 0 4px 8px rgba(26, 60, 99, 0.2);
+        letter-spacing: 0.8px;
+        box-shadow: 
+          0 2px 8px rgba(26, 60, 99, 0.15),
+          0 6px 16px rgba(26, 60, 99, 0.1);
 
         &:hover {
-          background: linear-gradient(135deg, #142d4a 0%, #1f4466 100%);
-          box-shadow: 0 6px 12px rgba(26, 60, 99, 0.3);
+          background: linear-gradient(135deg, #142d4a 0%, #1f4466 60%, #2a5a8a 100%);
+          box-shadow: 
+            0 4px 12px rgba(26, 60, 99, 0.2),
+            0 8px 24px rgba(26, 60, 99, 0.15),
+            0 0 0 1px rgba(248, 183, 132, 0.12);
           transform: translateY(-2px);
         }
 
@@ -199,6 +212,183 @@ $coquille-oeuf: #F0EAD6;
         }
       }
     }
+  }
+
+  .details-section {
+    max-width: 1000px;
+    margin: 4rem auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+
+    .details-header {
+      text-align: center;
+
+      h3 {
+        font-family: 'Lobster', cursive;
+        font-size: 1.9rem;
+        font-weight: 400;
+        color: $bleu-nuit;
+        margin: 0 0 0.75rem;
+      }
+
+      p {
+        margin: 0 auto;
+        max-width: 720px;
+        color: $gris-texte;
+        line-height: 1.6;
+      }
+    }
+
+    .detail-card {
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(26, 60, 99, 0.08), 0 8px 20px rgba(26, 60, 99, 0.12);
+      border: 1px solid rgba(26, 60, 99, 0.06);
+
+      .detail-card-header {
+        background: linear-gradient(135deg, rgba(26, 60, 99, 0.08) 0%, rgba(248, 183, 132, 0.12) 100%);
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid rgba(26, 60, 99, 0.08);
+
+        h4 {
+          margin: 0;
+          color: $bleu-nuit;
+          font-size: 1.35rem;
+          font-weight: 700;
+        }
+
+        .detail-subtitle {
+          display: inline-block;
+          margin-top: 0.35rem;
+          color: $orange-peche;
+          font-weight: 600;
+          letter-spacing: 0.3px;
+        }
+      }
+
+      .detail-card-content {
+        padding: 1.5rem;
+        color: $gris-texte;
+
+        > p {
+          margin: 0 0 1.25rem;
+          line-height: 1.75;
+        }
+      }
+    }
+
+    .detail-columns {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .three-columns {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .detail-block {
+      background-color: $gris-clair;
+      border-radius: 10px;
+      padding: 1.25rem;
+
+      h5 {
+        margin: 0 0 0.85rem;
+        color: $bleu-nuit;
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      p {
+        margin: 0;
+        line-height: 1.65;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          position: relative;
+          padding-left: 1.25rem;
+          margin-bottom: 0.7rem;
+          line-height: 1.55;
+
+          &::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: $orange-peche;
+            font-weight: 700;
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+    .tarifs-block {
+      background-color: rgba(248, 183, 132, 0.12);
+      border: 1px solid rgba(248, 183, 132, 0.22);
+    }
+
+    .note-block {
+      background-color: rgba(26, 60, 99, 0.06);
+    }
+
+    .full-width {
+      margin-top: 1rem;
+    }
+  }
+}
+
+.back-to-top {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  min-width: 46px;
+  height: 46px;
+  padding: 0 0.8rem;
+  border: 1px solid rgba(26, 60, 99, 0.22);
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  color: $bleu-nuit;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(26, 60, 99, 0.12);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px) scale(0.96);
+  transition: opacity 0.28s ease, transform 0.28s ease, visibility 0.28s ease, box-shadow 0.28s ease, background 0.28s ease, border-color 0.28s ease;
+  z-index: 20;
+
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+
+  &:hover {
+    transform: translateY(-2px) scale(1);
+    background: rgba(255, 255, 255, 0.96);
+    border-color: rgba(248, 183, 132, 0.55);
+    box-shadow: 0 12px 24px rgba(26, 60, 99, 0.16);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $orange-peche;
+    outline-offset: 3px;
   }
 }
 
@@ -213,6 +403,183 @@ $coquille-oeuf: #F0EAD6;
 
       .service-item {
         height: 100%;
+
+        .card-header {
+          display: flex;
+          align-items: center;
+        }
+
+        .accroche {
+          min-height: 72px;
+        }
+
+        .description-content {
+          min-height: 170px;
+        }
+
+        .services-list {
+          min-height: 255px;
+          display: flex;
+          flex-direction: column;
+
+          ul {
+            flex: 1;
+          }
+        }
+      }
+    }
+
+    .details-section {
+      .full-width {
+        grid-column: 1 / -1;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .prestation-container {
+    .details-section {
+      .detail-columns,
+      .three-columns {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  .back-to-top {
+    right: 1rem;
+    bottom: 1rem;
+    min-width: 42px;
+    height: 42px;
+    padding: 0 0.7rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .prestation-container {
+    .header-section {
+      margin-bottom: 2rem;
+
+      h2 {
+        font-size: 1.65rem;
+        line-height: 1.2;
+      }
+
+      .description {
+        font-size: 0.95rem;
+      }
+    }
+
+    .services {
+      gap: 1.5rem;
+
+      .service-item {
+        .card-header {
+          padding: 1rem 1.25rem;
+
+          h3 {
+            font-size: 1.3rem;
+            line-height: 1.2;
+          }
+        }
+
+        .accroche {
+          font-size: 1rem;
+          padding: 1.25rem 1.25rem 0;
+        }
+
+        .description-content,
+        .services-list,
+        .tarifs {
+          padding-left: 1.25rem;
+          padding-right: 1.25rem;
+        }
+
+        .description-content {
+          font-size: 0.92rem;
+          line-height: 1.65;
+        }
+
+        .services-list {
+          padding-top: 1.25rem;
+          padding-bottom: 1.25rem;
+
+          h4 {
+            font-size: 0.95rem;
+          }
+
+          ul li {
+            font-size: 0.88rem;
+            padding-left: 1.4rem;
+          }
+        }
+
+        .btn-service {
+          margin: 1.25rem;
+          padding: 0.9rem 1.2rem;
+          font-size: 0.92rem;
+          letter-spacing: 0.35px;
+        }
+      }
+    }
+
+    .details-section {
+      margin-top: 2.5rem;
+      gap: 1.25rem;
+
+      .details-header {
+        h3 {
+          font-size: 1.55rem;
+          line-height: 1.2;
+        }
+
+        p {
+          font-size: 0.95rem;
+        }
+      }
+
+      .detail-card {
+        .detail-card-header,
+        .detail-card-content {
+          padding-left: 1.1rem;
+          padding-right: 1.1rem;
+        }
+
+        .detail-card-header {
+          padding-top: 1rem;
+          padding-bottom: 1rem;
+
+          h4 {
+            font-size: 1.15rem;
+            line-height: 1.25;
+          }
+        }
+
+        .detail-card-content {
+          padding-top: 1.1rem;
+          padding-bottom: 1.1rem;
+
+          > p {
+            font-size: 0.93rem;
+            line-height: 1.65;
+          }
+        }
+      }
+
+      .detail-block {
+        padding: 1rem;
+
+        h5 {
+          font-size: 0.95rem;
+        }
+
+        p,
+        ul li {
+          font-size: 0.9rem;
+          line-height: 1.55;
+        }
       }
     }
   }
