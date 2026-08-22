@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#07143f"/>
+  <rect x="4" y="4" width="56" height="56" rx="9" fill="none" stroke="#ff9f72" stroke-width="3"/>
+  <text x="32" y="40" fill="#fff0c9" font-family="Arial, sans-serif" font-size="22" font-weight="700" text-anchor="middle">2MK</text>
+</svg>
