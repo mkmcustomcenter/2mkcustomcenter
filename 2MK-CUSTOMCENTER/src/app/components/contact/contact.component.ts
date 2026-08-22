@@ -27,6 +27,7 @@ export class ContactComponent {
         environment.emailJsServiceId,
         environment.emailJsTemplateId,
         {
+          to_email: environment.adminEmail,
           name: this.contact.name,
           email: this.contact.email,
           message: this.contact.message
