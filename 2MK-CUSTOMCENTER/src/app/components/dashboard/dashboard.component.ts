@@ -5,6 +5,17 @@ import { environment } from './dashboard.environment';
 import { PasswordResetService } from '../../services/password-reset.service';
 import emailjs from '@emailjs/browser';
 
+interface ContactMessage {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  status: 'pending' | 'sent' | 'failed';
+  created_at: string;
+  sent_at: string | null;
+  error_message: string | null;
+}
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -20,6 +31,9 @@ export class DashboardComponent implements OnInit {
   
   galerieImages: any[] = [];
   evenements: any[] = [];
+  contactMessages: ContactMessage[] = [];
+  contactsLoading = false;
+  contactsError = '';
   selectedGalerieFileName = '';
   galerieImagePreview = '';
   selectedEvenementFileName = '';
@@ -67,6 +81,9 @@ export class DashboardComponent implements OnInit {
     this.checkAuthentication();
     this.loadGalerie();
     this.loadEvenements();
+    if (this.isAuthenticated) {
+      this.loadContactMessages();
+    }
   }
 
   initLoginForm(): void {
@@ -144,6 +161,7 @@ export class DashboardComponent implements OnInit {
         localStorage.removeItem('dashboardAttempts');
         this.loginAttempt = 0;
         this.loginForm.reset();
+        this.loadContactMessages();
       } else {
         this.loginAttempt++;
         localStorage.setItem('dashboardAttempts', this.loginAttempt.toString());
@@ -175,6 +193,43 @@ export class DashboardComponent implements OnInit {
 
   onLogout(): void {
     this.logout();
+  }
+
+  async loadContactMessages(): Promise<void> {
+    this.contactsLoading = true;
+    this.contactsError = '';
+
+    try {
+      const response = await fetch(`${environment.backendApiUrl}/api/contacts`, {
+        headers: { 'x-admin-token': this.ADMIN_PASSWORD }
+      });
+      if (!response.ok) {
+        throw new Error('Impossible de charger les messages.');
+      }
+      this.contactMessages = await response.json() as ContactMessage[];
+    } catch (error) {
+      console.error('Contact list error:', error);
+      this.contactsError = 'Impossible de charger les messages de contact.';
+    } finally {
+      this.contactsLoading = false;
+    }
+  }
+
+  async updateContactStatus(contact: ContactMessage, status: ContactMessage['status']): Promise<void> {
+    const response = await fetch(`${environment.backendApiUrl}/api/contacts/${contact.id}/status`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-admin-token': this.ADMIN_PASSWORD
+      },
+      body: JSON.stringify({ status })
+    });
+
+    if (response.ok) {
+      contact.status = status;
+    } else {
+      this.contactsError = 'Impossible de modifier le statut.';
+    }
   }
 
   togglePasswordSection(): void {

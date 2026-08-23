@@ -71,6 +71,37 @@
   </div>
 
   <div class="dashboard-content" *ngIf="isAuthenticated">
+    <div class="dashboard-section contacts-section">
+      <div class="section-header">
+        <h2>Messages de contact</h2>
+        <span class="count-badge">{{ contactMessages.length }} message(s)</span>
+      </div>
+
+      <button type="button" class="btn-security" (click)="loadContactMessages()" [disabled]="contactsLoading">
+        {{ contactsLoading ? 'Chargement...' : 'Actualiser les messages' }}
+      </button>
+      <p class="message-box error" *ngIf="contactsError">{{ contactsError }}</p>
+      <p class="helper-text" *ngIf="!contactsLoading && !contactsError && contactMessages.length === 0">
+        Aucun message enregistré.
+      </p>
+
+      <div class="items-list" *ngIf="contactMessages.length > 0">
+        <div class="item-card contact-message-card" *ngFor="let contact of contactMessages">
+          <div class="item-header">
+            <h4>{{ contact.name }}</h4>
+            <select [value]="contact.status" (change)="updateContactStatus(contact, $any($event.target).value)" aria-label="Statut du message">
+              <option value="pending">En attente</option>
+              <option value="sent">Envoyé</option>
+              <option value="failed">Échec</option>
+            </select>
+          </div>
+          <p><a [href]="'mailto:' + contact.email">{{ contact.email }}</a></p>
+          <p class="item-description">{{ contact.message }}</p>
+          <small class="helper-text">{{ contact.created_at | date:'dd/MM/yyyy à HH:mm' }}</small>
+        </div>
+      </div>
+    </div>
+
     <!-- SECTION SÉCURITÉ -->
     <div class="dashboard-section security-section">
       <div class="section-header">

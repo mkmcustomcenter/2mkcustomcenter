@@ -3,6 +3,7 @@
 
 export const environment = {
   production: false,
+  backendApiUrl: 'https://your-api.example.com',
   emailJsServiceId: 'your_service_id_here',
   emailJsTemplateId: 'your_template_id_here',
   emailJsPublicKey: 'your_public_key_here',

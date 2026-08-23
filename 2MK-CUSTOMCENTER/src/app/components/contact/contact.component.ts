@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import emailjs from '@emailjs/browser';
 import { NgForm, FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { environment } from '../../../environments/environment';
@@ -21,24 +20,23 @@ export class ContactComponent {
     if (form.invalid) return;
     this.sending = true;
     this.error = '';
-    console.log('Sending email...', this.contact);
     try {
-      await emailjs.send(
-        environment.emailJsServiceId,
-        environment.emailJsTemplateId,
-        {
-          to_email: environment.adminEmail,
-          name: this.contact.name,
-          email: this.contact.email,
-          message: this.contact.message
-        },
-        environment.emailJsPublicKey
-      );
+      const response = await fetch(`${environment.backendApiUrl}/api/contacts`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(this.contact)
+      });
+
+      if (!response.ok) {
+        const result = await response.json().catch(() => null) as { error?: string } | null;
+        throw new Error(result?.error ?? 'Contact request failed');
+      }
+
       this.sent = true;
       form.resetForm();
     } catch (e) {
-      console.error('EmailJS send error:', e);
-      this.error = "Erreur lors de l'envoi. Merci de réessayer.";
+      console.error('Contact send error:', e);
+      this.error = e instanceof Error ? e.message : "Erreur lors de l'envoi. Merci de réessayer.";
     }
     this.sending = false;
   }
